@@ -31,6 +31,13 @@ auto StringToNumber(char* str)
 
 char* NumberToString(long long number)
 {
+    char* str = new char[100];
+    if (number == 0)
+    {
+        str[0] = '0';
+        str[1] = '\0';
+        return str;
+    }
     int digits = 0;
     int temp = number;
     
@@ -39,7 +46,7 @@ char* NumberToString(long long number)
         temp /= 10;
         digits++;
     }
-    char* str = new char[100];
+    
     int j = 0;
     if (number < 0)
     {
@@ -61,5 +68,5 @@ int main()
     // char* number = new char[30];
     // std::cin.getline(number, 30);
     // std::cout << StringToNumber(number);
-    std::cout << NumberToString(-1234);
+    std::cout << NumberToString(12);
 }
