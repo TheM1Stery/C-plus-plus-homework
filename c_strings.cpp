@@ -29,21 +29,37 @@ auto StringToNumber(char* str)
     return number;
 }
 
-char* NumberToString(int number)
+char* NumberToString(long long number)
 {
+    int digits = 0;
+    int temp = number;
     
-    while(number != 0)
+    while(temp != 0)
     {
-        int num = number % 10;
-        number /= 10;
-
+        temp /= 10;
+        digits++;
     }
+    char* str = new char[100];
+    int j = 0;
+    if (number < 0)
+    {
+        str[j++] = '-';
+        number *= -1;
+    }
+    for (int i = digits; i > 0; i--)
+    {
+        long long temp = pow(10, i - 1);
+        int num = (number / temp) % 10;
+        str[j++] = 48 + num;
+    }
+    return str;
 }
 
 
 int main()
 {
-    char* number = new char[30];
-    std::cin.getline(number, 30);
-    std::cout << StringToNumber(number);
+    // char* number = new char[30];
+    // std::cin.getline(number, 30);
+    // std::cout << StringToNumber(number);
+    std::cout << NumberToString(-1234);
 }
