@@ -1,5 +1,5 @@
 # Introduction
-## subtitle - hello there :D
+## Hello there :D
 
 
 Just my C++ homework! 
