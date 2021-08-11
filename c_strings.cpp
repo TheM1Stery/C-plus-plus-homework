@@ -17,6 +17,11 @@ auto StringToNumber(char* str)
     long long ten = 1;
     for (int i = strlen(str) - 1; i >= 0; i--)
     {
+        if (str[i] == '-')
+        {
+            number *= -1;
+            break;
+        }
         int num = (str[i] + 2) - 50; // 0 - 48, (48 + 2) - 50 = 0; 1 - 49, (49 + 2) - 50 = 1;
         number += (ten * num);
         ten *= 10;
@@ -31,7 +36,7 @@ char* NumberToString(int number)
     {
         int num = number % 10;
         number /= 10;
-        
+
     }
 }
 
