@@ -123,6 +123,28 @@ bool check_equal(char check_arr[3])
     return true;
 }
 
+int linear_search(char board[][3],int item, const size_t size = 3)
+{
+    for (int i = 0; i < size * size; i++)
+    {
+        if (item == board[0][i])
+        {
+            return i;
+        }
+    }
+}
+
+
+// void bot(char board[][3], int count, const size_t size = 3)
+// {
+//     for (int i = 0; i < size * size; i++)
+//     {
+//         if (board[0][pos - 1] == 'X' || board[0][pos - 1] == 'O')
+//         {
+
+//         }
+//     }
+// }
 
 bool winning_condition(char board[][3], const size_t size)
 {

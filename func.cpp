@@ -40,6 +40,27 @@ template <typename T> T* remove(T* arr, int remove,  int* const size)
 	return new_arr;
 }
 
+
+template <typename T> T* insert(T* arr, int insert,int index, int* const size)
+{
+	T* new_arr = new int[*size + 1];
+	int c = 0;
+	for (int i = 0; i < *size; i++)
+	{
+		if (i != index)
+		{
+			new_arr[c] = arr[i];
+			c++;
+		}else
+		{
+			new_arr[c++] = insert;
+			new_arr[c++] = arr[i];
+		}
+	}
+	(*size)++;
+	return new_arr;
+}
+
 template <typename T> T* shift(T* arr, int* const size)
 {
 	T* new_arr = new int[*size - 1];
@@ -122,7 +143,7 @@ template <typename T> T* prepend(T* arr,int prepend, int* const size)
 	return r_arr;
 }
 
-template <typename T> T* extend(T arr[], T arr2[], int* const size1, const int size2)
+template <typename T> T* extend(T* arr, T* arr2, int* const size1, const int size2)
 {
 	
 	T* r_arr = new int[*size1 + size2];
@@ -149,14 +170,16 @@ template <typename T> void print_array(T arr[], const int size)
 	{
 		std::cout << arr[i] << " ";
 	}
+	std::cout << "\n";
 }
 
 int main()
 {
 	int* arr = new int[10] { 1,2,3,4,5,6,7,8,9,10 };
-	//int* arr2 = new int[6] { 11,12,13,14,15, 16};
+	int* arr2 = new int[6] { 11,12,13,14,15, 16};
 	int size = 10;
-	//int size2 = 6;
-	arr = remove(arr, 3, &size);
+	int size2 = 6;
+	print_array(arr, size);
+	arr = insert(arr, 99, 3, &size);
 	print_array(arr, size);
 }
