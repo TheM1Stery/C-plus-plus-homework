@@ -15,6 +15,7 @@ auto StringToNumber(char* str)
     // return number;
     long long number = 0;
     long long ten = 1;
+    int length = 0;
     for (int i = strlen(str) - 1; i >= 0; i--)
     {
         if (str[i] == '-')
@@ -31,7 +32,7 @@ auto StringToNumber(char* str)
 
 char* NumberToString(long long number)
 {
-    char* str = new char[100];
+    char* str = new char[100]{ 0 };
     if (number == 0)
     {
         str[0] = '0';
@@ -40,13 +41,13 @@ char* NumberToString(long long number)
     }
     int digits = 0;
     int temp = number;
-    
-    while(temp != 0)
+
+    while (temp != 0)
     {
         temp /= 10;
         digits++;
     }
-    
+
     int j = 0;
     if (number < 0)
     {
@@ -61,16 +62,50 @@ char* NumberToString(long long number)
         str[j] = 48 + num;
         j++;
     }
-    str[j] = '\0';
+    //str[j] = '\0';
     return str;
 }
 
+char* Uppercase(char* str1)
+{
+    int i = 0;
+    while (str1[i] != '\0')
+    {
+        if (str1[i] >= 'a' && str1[i] <= 'z')
+        {
+            str1[i] -= 32;
+        }
+        i++;
+    }
+    return str1;
+}
+
+char* Lowercase(char* str1)
+{
+    int i = 0;
+    while (str1[i] != 0)
+    {
+        if (str1[i] >= 'A' && str1[i] <= 'Z')
+        {
+            str1[i] += 32;
+        }
+        i++;
+    }
+    return str1;
+}
+
+//char* mystrrev(char* str1)
+//{
+//    int i = 0;
+//    while(str1)
+//}
 
 int main()
 {
-    // char* number = new char[30];
-    // std::cin.getline(number, 30);
+    char* str = new char[30];
+    std::cin.getline(str, 30);
     // std::cout << StringToNumber(number);
-    std::cout << NumberToString(1);
-    
+    std::cout << NumberToString(1) << "\n";
+    //std::cout << Uppercase(str) << "\n";
+    std::cout << Lowercase(str) << "\n";
 }
