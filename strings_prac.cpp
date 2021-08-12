@@ -1,6 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
-
+#include <string.h>
 
 int find_count_of_words(char* str, const char* word)
 {
