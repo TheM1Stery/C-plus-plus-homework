@@ -39,14 +39,10 @@ bool check_pos(char board[][3], int pos)
 {
     if (pos < 1 || pos > 10)
     {
-        std::cout << "Your entered position is not on the board" << std::endl;
-        Sleep(1000);
         return false;
     }
     if (board[0][pos - 1] == 'X' || board[0][pos - 1] == 'O')
     {
-        std::cout << "Your entered position is already taken" << std::endl;
-        Sleep(1000);
         return false;
     }
     return true;
@@ -135,16 +131,38 @@ int linear_search(char board[][3],int item, const size_t size = 3)
 }
 
 
-// void bot(char board[][3], int count, const size_t size = 3)
-// {
-//     for (int i = 0; i < size * size; i++)
-//     {
-//         if (board[0][pos - 1] == 'X' || board[0][pos - 1] == 'O')
-//         {
-
-//         }
-//     }
-// }
+void bot(char board[][3], int count, const size_t size = 3)
+{
+    // int pos[9];
+    // int c = 0;
+    bool check_corner = false;
+    for (int i = 0; i < size * size; i++)
+    {
+        if ((i + 1) % 2 == 0 && (i + 1) != 5 && check_pos(board, 5) && board[0][i] == 'X')
+        {
+            check_corner = true;
+        }
+        
+    }
+    if (check_corner)
+    {
+        enter_the_position_on_the_board(board, 5,count);
+        return;
+    }
+    for (int i = 0; i < size * size; i++)
+    {
+        int check_hor = 0;
+        int check_ver = 0;
+        int check_diag = 0;
+        bool check_hor = false, check_ver = false; check_diag = false;
+        for (int j = 0; j < 3;j++)
+        {
+            check_hor += 1;
+            check_diag += 2;
+            check_ver += 3;
+        }
+    }
+}
 
 bool winning_condition(char board[][3], const size_t size)
 {
