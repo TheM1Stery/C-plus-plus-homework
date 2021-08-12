@@ -1,6 +1,12 @@
 #include <iostream>
 
 
+template <typename T> int find(T* arr, const int size)
+{
+	return;
+}
+
+
 template <typename T>void reverse(T* arr, const int size)
 {
 	for (int i = 0; i < size / 2; i++)
