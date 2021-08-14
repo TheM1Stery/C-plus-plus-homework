@@ -162,7 +162,7 @@ template <typename T> void neg_pos_null(T arr[], const size_t size)
 
 int main()
 {
-    size_t size = 6;
+    const size_t size = 6;
     // int* arr = create_dynamic_memory<int>(size);
     // int* arr = new int[size] {1,2,3,5,7,4};
     int arr[size] = {0,0, 1,2, -3,-5};
