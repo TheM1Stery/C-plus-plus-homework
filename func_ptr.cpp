@@ -10,7 +10,8 @@ enum MENU
 {
     MAX = 1,
     MIN,
-    AVG
+    AVG,
+    RST = 1337
 };
 
 template <typename T, typename R> R fmax(T* arr, const size_t size)
@@ -87,10 +88,9 @@ int main()
     fill_array(arr, size);
     do
     {
-
         print_array(arr, size);
         std::cout << "Enter 1337 to reset the array\n\n";
-        std::cout << "1. Find the max element of the array\n2. Find the min element of the array\n3. Find the average of the array\n";
+        std::cout << "1. Find the max element of the array\n2. Find the min element of the array\n3. Find the average of the array\n0. Exit\n";
         std::cout << "> ";
         std::cin >> choice;
         switch (choice)
@@ -98,17 +98,24 @@ int main()
             case 0:
                 break;
             case MAX:
+                system("cls");
                 std::cout << "Max element of the array: " << Action<int, double>(arr, size, ptr_to_func[choice - 1]) << "\n";
                 break;
             case MIN:
+                system("cls");
                 std::cout << "Min element of the array: " << Action<int, double>(arr, size, ptr_to_func[choice - 1]) << "\n";
                 break;
             case AVG:
+                system("cls");
                 std::cout<< "Average of the array: " << Action<int, double>(arr, size, ptr_to_func[choice - 1]) << "\n";
                 break;
-            case 1337:
+            case RST:
+                system("cls");
                 fill_array(arr, size);
                 break;
+            default:
+                
+                std::cout << "Wrong input. Try again!" << "\n";
 
         }
         std::cout << "\n\n";
