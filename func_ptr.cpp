@@ -114,7 +114,7 @@ int main()
                 fill_array(arr, size);
                 break;
             default:
-                
+                system("cls");
                 std::cout << "Wrong input. Try again!" << "\n";
 
         }
