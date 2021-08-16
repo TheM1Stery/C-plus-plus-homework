@@ -2,6 +2,16 @@
 #include <string.h>
 #include <cmath>
 
+
+
+
+// int mystrcmp(const char * str1, const char * str2)
+// {
+
+// }
+
+
+
 auto StringToNumber(char* str)
 {
     // long long number = 0;
@@ -94,18 +104,24 @@ char* Lowercase(char* str1)
     return str1;
 }
 
-//char* mystrrev(char* str1)
-//{
-//    int i = 0;
-//    while(str1)
-//}
+char* mystrrev(char* str1)
+{
+   int length = strlen(str1);
+   for (int i = 0; i < length / 2; i++)
+   {
+       std::swap(str1[i], str1[length - i - 1]);
+   }
+   return str1;
+}
 
 int main()
 {
     char* str = new char[30];
     std::cin.getline(str, 30);
     // std::cout << StringToNumber(number);
-    std::cout << NumberToString(1) << "\n";
+    //std::cout << NumberToString(1) << "\n";
     //std::cout << Uppercase(str) << "\n";
-    std::cout << Lowercase(str) << "\n";
+    //std::cout << Lowercase(str) << "\n";
+    // std::cout << mystrrev(str) << "\n";
+    
 }
