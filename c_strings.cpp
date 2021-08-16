@@ -5,10 +5,18 @@
 
 
 
-// int mystrcmp(const char * str1, const char * str2)
-// {
-
-// }
+int mystrcmp(const char * str1, const char * str2)
+{
+    int i = 0;
+    while(true)
+    {
+        if (str1[i] > str2[i])return 1;
+        if (str1[i] < str2[i]) return -1;
+        if (str1[i] == '\0') return 0;
+        i++;
+        
+    }
+}
 
 
 
@@ -46,7 +54,6 @@ char* NumberToString(long long number)
     if (number == 0)
     {
         str[0] = '0';
-        str[1] = '\0';
         return str;
     }
     int digits = 0;
@@ -116,12 +123,13 @@ char* mystrrev(char* str1)
 
 int main()
 {
-    char* str = new char[30];
-    std::cin.getline(str, 30);
+    // char* str = new char[30];
+    // std::cin.getline(str, 30);
     // std::cout << StringToNumber(number);
-    //std::cout << NumberToString(1) << "\n";
+    //std::cout << NumberToString(0) << "\n";
     //std::cout << Uppercase(str) << "\n";
     //std::cout << Lowercase(str) << "\n";
     // std::cout << mystrrev(str) << "\n";
-    
+    std::cout << mystrcmp("AAAAAA", "B");
+
 }
