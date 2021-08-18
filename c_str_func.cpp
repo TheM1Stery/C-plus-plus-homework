@@ -1,7 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <string.h>
-#include <windows.h>
+
 
 char *replace(char *str, size_t buffer_size,  const char *word, const char *replace)
 {
