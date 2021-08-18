@@ -32,4 +32,5 @@
 *.app
 *.zip
 
+prac.cpp
 /.vscode
