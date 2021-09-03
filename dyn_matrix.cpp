@@ -123,17 +123,30 @@ int** multiply_matrices(int** matrix, int** matrix2, const size_t size1, const s
 	return mult_matrix;
 }
 
+void delete_pointers(int**& matrix, size_t size)
+{
+	if (matrix == nullptr)
+	{
+		return;
+	}
+	for (int i = 0; i < size; i++)
+	{
+		delete[] matrix[i];
+	}
+}
+
+
 int main()
 {
 	int** matrix = nullptr;
-	size_t size = 3;
+	// size_t size = 3;
 	/*initiliaze(matrix, size, 10);
 	fill(matrix, size, 10);
 	print(matrix, size, 10);
 	delete_zero_str(matrix, size, 10);
 	print(matrix, size, 10);*/
 	int** matrix2 = nullptr;
-	size_t size1 = 4, size2 = 3, size3 = 3, size4 = 3;
+	size_t size1 = 2, size2 = 4, size3 = 2, size4 = 2;
 	initiliaze(matrix,size1, size2);
 	initiliaze(matrix2, size3, size4);
 	fill(matrix, size1, size2);
@@ -149,10 +162,10 @@ int main()
 	}
 	if (matrix3 == nullptr)
 	{
-		std::cout << "These matrices cannot be multiplied";
+		std::cout << "These matrices cannot be multiplied\n";
 	}
-	delete[] matrix;
-	delete[] matrix2;
-	delete[] matrix3;
+	delete_pointers(matrix, size1);
+	delete_pointers(matrix2, size3);
+	delete_pointers(matrix3, size1);
 }
 
