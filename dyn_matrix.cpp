@@ -93,15 +93,34 @@ int** sum(int** matrix, int** matrix2, const int size1, const int size2)
 	return sum_arr;
 }
 
-int** multiply_matrices(int** matrix, int** matrix2, const int size1, const int size2, const int size3, const int size4)
+
+// size1 and size2 - dimensions of the first matrix
+// size3 and size4 - dimensions of the second matrix
+int** multiply_matrices(int** matrix, int** matrix2, const size_t size1, const size_t size2, const size_t size3, const size_t size4)
 {
+	// Если число столбцов у первой матрицы не равна числу строк второй, то эти матрицы не умножаются
 	if (size2 != size3)
 	{
 		return nullptr;
 	}
 	int** mult_matrix = nullptr;
+	// Есть такое правило, что результат произведения матрицы это число строк первой матрицы x число столбцов второй матрицы
 	initiliaze(mult_matrix, size1, size4);
-	
+	double dot_product = 0;
+	for (int i = 0; i < size1; i++)
+	{
+		
+		for (int j = 0; j < size4; j++)
+		{
+			dot_product = 0;
+			for (int k = 0; k < size2; k++)
+			{
+				dot_product += (matrix[i][k] * matrix2[k][j]);
+			}
+			mult_matrix[i][j] = dot_product;
+		}
+	}
+	return mult_matrix;
 }
 
 int main()
@@ -114,14 +133,26 @@ int main()
 	delete_zero_str(matrix, size, 10);
 	print(matrix, size, 10);*/
 	int** matrix2 = nullptr;
-	initiliaze(matrix, size, 3);
-	initiliaze(matrix2, size, 3);
-	fill(matrix, size, 3);
-	fill(matrix2, size, 3);
-	print(matrix, size, 3);
-	print(matrix2, size, 3);
-	int** matrix3 = sum(matrix, matrix2, 3, 3);
-	print(matrix3, size, 3);
-	
+	size_t size1 = 4, size2 = 3, size3 = 3, size4 = 3;
+	initiliaze(matrix,size1, size2);
+	initiliaze(matrix2, size3, size4);
+	fill(matrix, size1, size2);
+	fill(matrix2, size3, size4);
+	print(matrix, size1, size2);
+	print(matrix2, size3, size4);
+	// int** matrix3 = sum(matrix, matrix2, 3, 3);
+	// print(matrix3, size, 3);
+	int** matrix3 = multiply_matrices(matrix, matrix2, size1, size2, size3, size4);
+	if (matrix3 != nullptr)
+	{
+		print(matrix3, size1,size4);
+	}
+	if (matrix3 == nullptr)
+	{
+		std::cout << "These matrices cannot be multiplied";
+	}
+	delete[] matrix;
+	delete[] matrix2;
+	delete[] matrix3;
 }
 
