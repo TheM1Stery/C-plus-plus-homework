@@ -14,12 +14,13 @@ void initiliaze(char**& str, const size_t size, const size_t buffer_size)
     str = str2;
 }
 
-void delete_arr(char** arr, const size_t size)
+void free_mem(char** arr, const size_t size)
 {
     for (int i = 0; i < size; i++)
     {
         delete[] arr[i];
     }
+    delete[] arr;
 }
 
 
@@ -66,14 +67,13 @@ void insert(char**& arr, int pos, char* insertable, size_t& size)
     char* move = temp[0];
     temp[0] = insertable;
     int i = 1;
-    for (; i < size + 1; i++)
+    for (; i < size; i++)
     {
         char* move_next = move;
-		move = temp[i];
-		temp[i] = move_next;
-    }
+        move = temp[i];
+        temp[i] = move_next;
+    }                        
     size++;
-
 }
 
 
@@ -83,6 +83,7 @@ void print_arr(char** arr, size_t size)
     {
         std::cout << arr[i] << " ";
     }
+
     std::cout << "\n";
 }
 
@@ -101,9 +102,10 @@ int main()
     strcpy_s(arr[1], 6, "Hello");
     strcpy_s(arr[2], 6, "Hello");
     print_arr(arr, size);
-    // push_back(arr, str, size);
-    // push_front(arr, str, size);
+    /*push_back(arr, str, size);
+    push_front(arr, str, size);*/
     insert(arr, 1, str, size);
     print_arr(arr, size);
-    delete_arr(arr, size);
+    free_mem(arr, size);
+    
 }
