@@ -72,7 +72,7 @@ void insert(char**& arr, int pos, char* insertable, size_t& size)
         char* move_next = move;
         move = temp[i];
         temp[i] = move_next;
-    }                        
+    }
     size++;
 }
 
@@ -97,15 +97,19 @@ int main()
     char** arr = new char* [size];
     initiliaze(arr, size, 100);
     char* str = new char[100];
+    char* str2 = new char[100];
+    char* str3 = new char[100];
     strcpy_s(str, 14, "Disco Odyssey");
+    strcpy_s(str2, 15, "!!!!!!!!!!!!!!");
+    strcpy_s(str3, 19, "AAAAAAAAAAAAAAAAAA");
     strcpy_s(arr[0], 13, "The Magician");
     strcpy_s(arr[1], 6, "Hello");
     strcpy_s(arr[2], 6, "Hello");
     print_arr(arr, size);
-    /*push_back(arr, str, size);
-    push_front(arr, str, size);*/
-    insert(arr, 1, str, size);
+    push_back(arr, str, size);
+    push_front(arr, str2, size);
+    insert(arr, 1, str3, size);
     print_arr(arr, size);
     free_mem(arr, size);
-    
+
 }
