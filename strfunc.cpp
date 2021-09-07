@@ -1,91 +1,150 @@
 #include <iostream>
 #include <string.h>
+#include <random>
+#include <ctime>
+
+std::default_random_engine engine(time(nullptr));
+std::uniform_int_distribution<int> range(0, 9);
 
 
-void initiliaze(char**& str, const size_t size, const size_t buffer_size)
+void initiliaze(int**& matrix, const size_t size, const size_t size2)
 {
-    char** str2 = new char* [size];
+    int** matrix2 = new int* [size];
 
     for (int i = 0; i < size; i++)
     {
-        str2[i] = new char[buffer_size];
+        matrix2[i] = new int[size];
     }
-    delete[] str;
-    str = str2;
+    delete[] matrix;
+    matrix = matrix2;
 }
 
-void free_mem(char** arr, const size_t size)
+void free_mem(int** matrix, const size_t size)
 {
     for (int i = 0; i < size; i++)
     {
-        delete[] arr[i];
+        delete[] matrix[i];
     }
-    delete[] arr;
+    delete[] matrix;
 }
 
 
-void push_back(char**& arr, char* str, size_t& size)
+void push_back(int**& matrix, int* row, size_t& size)
 {
-    char** new_arr = new char* [size + 1];
-    int i;
-    for (i = 0; i < size; i++)
+    size++;
+    int** r_arr = new int*[size];
+    int* new_arr = new int[size - 1];
+    for (int i = 0; i < size - 1; i++)
     {
-        new_arr[i] = arr[i];
+        new_arr[i] = row[i];
     }
-    new_arr[i] = str;
+    r_arr[size - 1] = new_arr;
+    for (int i = 0; i < size - 1; i++)
+    {
+        r_arr[i] = matrix[i];
+    }
+    delete[] matrix;
+    matrix = r_arr;
+}
+
+
+void push_front(int**& matrix, int* row, size_t& size)
+{
+    size++;
+    int** r_arr = new int*[size];
+    int* new_arr = new int[size - 1];
+    for (int i = 0; i < size - 1; i++)
+    {
+        new_arr[i] = row[i];
+    }
+    r_arr[0] = new_arr;
+    for (int i = 1; i < size; i++)
+    {
+        r_arr[i] = matrix[i - 1];
+    }
+    delete[] matrix;
+    matrix = r_arr;
+}
+
+void insert(int**& arr, int pos, int* insertable, size_t& size)
+{
+    int** new_arr = new int*[size + 1];
+    int* insert_arr = new int[size];
+    for (int i = 0; i < size; i++)
+    {
+        insert_arr[i] = insertable[i];
+    }
+    int c = 0;
+    for (int i = 0; i < size + 1; i++)
+    {
+        if (i != pos)
+        {
+            new_arr[c] = arr[i];
+            c++;
+        }
+        else
+        {
+            new_arr[c++] = insert_arr;
+            if (i < size)
+            {
+                new_arr[c++] = arr[i];
+            }
+
+        }
+    }
+    size++;
     delete[] arr;
     arr = new_arr;
-    size++;
 }
 
 
-void push_front(char**& arr, char* str, size_t& size)
+void pop(int**& arr, int pos, size_t& size)
 {
-    char** new_arr = new char* [size + 1];
-    int i = 0;
-    new_arr[i++] = str;
-    for (; i < size + 1; i++)
+    if (pos >= size || pos < 0)
     {
-        new_arr[i] = arr[i - 1];
+        return;
     }
-    delete[] arr;
-    arr = new_arr;
-    size++;
-}
-
-void insert(char**& arr, int pos, char* insertable, size_t& size)
-{
-    char** new_arr = new char* [size + 1];
-    initiliaze(new_arr, size + 1, 100);
+    int** new_arr = new int*[size - 1];
+    int c = 0;
     for (int i = 0; i < size; i++)
     {
-        new_arr[i] = arr[i];
+        if (i != pos)
+        {
+            new_arr[c] = arr[i];
+            c++;
+        }
+
     }
+    size--;
     delete[] arr;
     arr = new_arr;
-    char** temp = &arr[pos];
-    char* move = temp[0];
-    temp[0] = insertable;
-    int i = 1;
-    for (; i < size; i++)
-    {
-        char* move_next = move;
-        move = temp[i];
-        temp[i] = move_next;
-    }
-    size++;
 }
 
 
-void print_arr(char** arr, size_t size)
+void fill_random(int** arr, const size_t size)
 {
     for (int i = 0; i < size; i++)
     {
-        std::cout << arr[i] << " ";
+        for (int j = 0; j < size; j++)
+        {
+            arr[i][j] = range(engine);
+        }
     }
-
+}
+void print_matrix(int** arr, size_t size, size_t size2)
+{
+    for (int i = 0; i < size; i++)
+    {
+        for (int j = 0; j < size2; j++)
+        {
+            std::cout << arr[i][j] << "\t";
+        }
+        std::cout << "\n";
+    }
     std::cout << "\n";
 }
+
+
 
 
 
@@ -94,22 +153,16 @@ void print_arr(char** arr, size_t size)
 int main()
 {
     size_t size = 3;
-    char** arr = new char* [size];
-    initiliaze(arr, size, 100);
-    char* str = new char[100];
-    char* str2 = new char[100];
-    char* str3 = new char[100];
-    strcpy_s(str, 14, "Disco Odyssey");
-    strcpy_s(str2, 15, "!!!!!!!!!!!!!!");
-    strcpy_s(str3, 19, "AAAAAAAAAAAAAAAAAA");
-    strcpy_s(arr[0], 13, "The Magician");
-    strcpy_s(arr[1], 6, "Hello");
-    strcpy_s(arr[2], 6, "Hello");
-    print_arr(arr, size);
-    push_back(arr, str, size);
-    push_front(arr, str2, size);
-    insert(arr, 1, str3, size);
-    print_arr(arr, size);
-    free_mem(arr, size);
-
+    int** matrix = nullptr;
+    initiliaze(matrix, size, size);
+    fill_random(matrix, size);
+    int* arr = new int[3]{ 1,2,3 };
+    print_matrix(matrix, size, 3);
+    push_back(matrix, arr, size);
+    push_front(matrix, arr, size);
+    insert(matrix, 1, arr, size);
+    print_matrix(matrix, size, 3);
+    pop(matrix, 1, size);
+    print_matrix(matrix, size, 3);
+    free_mem(matrix, size);
 }
