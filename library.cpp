@@ -24,6 +24,14 @@ void initiliaze_obj(Book** library, const size_t size)
     }
 }
 
+void delete_obj(Book** library, const size_t size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        delete library[i];
+    }
+}
+
 void create_book(Book* book, const char* title, const char* author, const char* publisher,const char* genre, const size_t buffer_size = 100)
 {
     book->title = new char[buffer_size];
@@ -184,6 +192,9 @@ int main()
     create_book(library[8], "Book9", "Author9", "Publisher9", "Genre9");
     create_book(library[9], "Book10", "Author10", "Publisher10", "Genre10");
     size_t srch_size = 0;
-    // Book** srch_res = search_author(library, "Author1", 10, srch_size);
+    // Book** srch_res = search_author(library, "Author1", size, srch_size);
     // print_lib(srch_res, srch_size);
+    // delete[] srch_res;
+    delete_obj(library, size);
+    delete[] library;
 }
