@@ -75,8 +75,8 @@ void convert_to_mix(Fraction* fraction)
 	int number{};
 	if (fraction->numerator > fraction->denominator)
 	{
-		number = fraction->numerator % fraction->denominator;
-		fraction->numerator -= (fraction->denominator * number);
+		number = fraction->numerator / fraction->denominator;
+		fraction->numerator = fraction->numerator % fraction->denominator;
 	}
 	fraction->mix = number;
 }
@@ -117,6 +117,25 @@ Fraction* subtract_fractions(Fraction* fraction1, Fraction* fraction2)
 	return fraction_result;
 }
 
+Fraction* mult_fractions(Fraction* fraction1, Fraction* fraction2)
+{
+	Fraction* fraction_result = new Fraction();
+	int a = fraction1->numerator, b = fraction2->numerator, c = fraction1->denominator, d = fraction2->denominator;
+	fraction_result->numerator = a * b;
+	fraction_result->denominator = c * d;
+	reduce(fraction_result);
+	convert_to_mix(fraction_result);
+	return fraction_result;
+}
+
+Fraction* div_fractions(Fraction* fraction1, Fraction* fraction2)
+{
+	Fraction* fraction_result = new Fraction();
+	fraction_result->numerator = fraction2->denominator;
+	fraction_result->denominator = fraction2->numerator;
+	fraction_result = mult_fractions(fraction1, fraction_result);
+	return fraction_result;
+}
 
 
 
@@ -158,11 +177,12 @@ int main()
 {
 	Fraction* fraction = new Fraction();
 	Fraction* fraction2 = new Fraction();
-	fraction->numerator = 5;
+	fraction->numerator = 20;
 	fraction->denominator = 8;
-	fraction2->numerator = 10;
+	fraction2->numerator = 5;
 	fraction2->denominator = 25;
-	Fraction* fraction3 = sum_fractions(fraction, fraction2);
+	Fraction* fraction3 = mult_fractions(fraction, fraction2);
 	print_fraction(fraction3);
+	delete fraction3;
 	
 }
