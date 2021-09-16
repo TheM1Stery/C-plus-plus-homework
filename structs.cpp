@@ -49,11 +49,11 @@ void print_fraction(Fraction* fraction)
 {
 	if (fraction->mix != 0)
 	{
-		std::cout << fraction->mix << " " << fraction->numerator << "|" << fraction->denominator;
+		std::cout << fraction->mix << " " << fraction->numerator << "|" << fraction->denominator << std::endl;
 	}
 	if (fraction->mix == 0)
 	{
-		std::cout << fraction->numerator << "|" << fraction->denominator;
+		std::cout << fraction->numerator << "|" << fraction->denominator << std::endl;
 	}
 	
 }
@@ -99,7 +99,7 @@ Fraction* sum_fractions(Fraction* fraction1, Fraction* fraction2) // было б
 	return fraction_result;
 }
 
-Fraction* subtract_fractions(Fraction* fraction1, Fraction* fraction2)
+Fraction* sub_fractions(Fraction* fraction1, Fraction* fraction2)
 {
 	Fraction* fraction_result = new Fraction();
 	int lcm = least_common_divisor(fraction1->denominator, fraction2->denominator);
@@ -164,25 +164,47 @@ void print_rectangle(Rectangle* rectangle)
 {
 	for (int i = 0; i < rectangle->width; i++)
 	{
-		for (int j = 0; j < rectangle->length; i++)
+		for (int j = 0; j < rectangle->length; j++)
 		{
-
+			if ((i != 0 && i != rectangle->width - 1) && (j != 0 && j != rectangle->length - 1))
+			{
+				std::cout << "  ";
+				continue;
+			}
+			std::cout << "* ";
 		}
+		std::cout << "\n";
 	}
+	std::cout << "\tRectangle axis: \n\tx: " << rectangle->x_axis_pos << " y: " << rectangle->y_axis_pos;
+	std::cout << std::endl;
 }
 
 
 
 int main()
 {
-	Fraction* fraction = new Fraction();
-	Fraction* fraction2 = new Fraction();
-	fraction->numerator = 20;
-	fraction->denominator = 8;
-	fraction2->numerator = 5;
-	fraction2->denominator = 25;
-	Fraction* fraction3 = mult_fractions(fraction, fraction2);
-	print_fraction(fraction3);
-	delete fraction3;
+	// Fraction* fraction = new Fraction();
+	// Fraction* fraction2 = new Fraction();
+	// fraction->numerator = 1;
+	// fraction->denominator = 8;
+	// fraction2->numerator = 1;
+	// fraction2->denominator = 33;
+	// print_fraction(fraction);
+	// print_fraction(fraction2);
+	// Fraction* fraction3 = sub_fractions(fraction, fraction2);
+	// print_fraction(fraction3);
+	// delete fraction;
+	// delete fraction2;
+	// delete fraction3;
+	// Rectangle* rectangle = new Rectangle{1,2,10,7};
+	// print_rectangle(rectangle);
+	// move_axis(rectangle, 10, 20);
+	// print_rectangle(rectangle);
+	// delete rectangle;
+	// Axis* axis = new Axis{5,6};
+	// Axis* axis2 = new Axis{-7,11};
+	// std::cout << distance(axis,axis2) << std::endl;
+	// delete axis;
+	// delete axis2;
 	
 }
